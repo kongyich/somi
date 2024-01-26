@@ -16,7 +16,7 @@
     },
     "plugins": [
         // "@typescript-eslint",
-        // "react"
+        "react"
     ],
     "rules": {
     }
