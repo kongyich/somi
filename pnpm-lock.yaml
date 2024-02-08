@@ -32,6 +32,8 @@ importers:
         specifier: ^5.3.3
         version: registry.npmmirror.com/typescript@5.3.3
 
+  app/main: {}
+
 packages:
 
   /@babel/code-frame@7.23.5:
