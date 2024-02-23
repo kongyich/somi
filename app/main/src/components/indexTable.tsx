@@ -15,7 +15,7 @@ const ListTable: React.FC = () => {
   const nav = useNavigate()
 
   const editItem = () => {
-    nav('/edit')
+    nav('/question/edit')
   }
 
   const columns: TableProps<DataType>['columns'] = [
