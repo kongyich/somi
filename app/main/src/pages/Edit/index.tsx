@@ -1,6 +1,5 @@
 import { FC } from 'react'
 
-
 const Edit: FC = () => {
   return (
     <div>edit</div>
