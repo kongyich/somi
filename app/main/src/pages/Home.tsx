@@ -4,7 +4,6 @@ import IndexTable from '../components/indexTable'
 const Home: FC = () => {
   return (
     <div>
-      home
       <IndexTable />
     </div>
   )
