@@ -1,23 +1,44 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+// import produce from 'immer'
+import { ComponentPropsType } from '../../components/QuestionComponents'
+import { insertNewComponent } from "../utils";
 
+export type ComponentInfoType = {
+  fe_id: string,
+  type: string,
+  title: string,
+  isHidden?: boolean
+  isLocked?: boolean
+  props: ComponentPropsType
+}
+ 
 export type ComponentsStateType = {
-  num: number
+  selectedId: string,
+  componentList: Array<ComponentInfoType>,
+  copiedComponent: ComponentInfoType | null
 }
 
 const INIT_STATE: ComponentsStateType = {
-  num: 0
+  selectedId: '',
+  componentList: [],
+  copiedComponent: null
 }
 
 export const componentsSlice = createSlice({
   name: 'components',
   initialState: INIT_STATE,
   reducers: {
-    increment: state => {
-      state.num += 1
-    },
+    // increment: state => {
+    //   state.num += 1
+    // },
+
+    addComponent: (draft: ComponentsStateType, action: PayloadAction<ComponentInfoType>) => {
+      const newComponent = action.payload
+      insertNewComponent(draft, newComponent)
+    }
   }
 })
 
-export const { increment } = componentsSlice.actions
+export const { addComponent } = componentsSlice.actions
 
 export default componentsSlice.reducer
