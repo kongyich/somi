@@ -28,9 +28,6 @@ export const componentsSlice = createSlice({
   name: 'components',
   initialState: INIT_STATE,
   reducers: {
-    // increment: state => {
-    //   state.num += 1
-    // },
 
     addComponent: (draft: ComponentsStateType, action: PayloadAction<ComponentInfoType>) => {
       const newComponent = action.payload
