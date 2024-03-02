@@ -11,7 +11,7 @@ export type ComponentInfoType = {
   isLocked?: boolean
   props: ComponentPropsType
 }
- 
+
 export type ComponentsStateType = {
   selectedId: string,
   componentList: Array<ComponentInfoType>,
@@ -35,10 +35,13 @@ export const componentsSlice = createSlice({
     addComponent: (draft: ComponentsStateType, action: PayloadAction<ComponentInfoType>) => {
       const newComponent = action.payload
       insertNewComponent(draft, newComponent)
+    },
+    changeSelectedId: (draft: ComponentsStateType, action: PayloadAction<string>) => {
+      draft.selectedId = action.payload
     }
   }
 })
 
-export const { addComponent } = componentsSlice.actions
+export const { addComponent, changeSelectedId } = componentsSlice.actions
 
 export default componentsSlice.reducer
