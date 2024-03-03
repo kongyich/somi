@@ -36,7 +36,7 @@ const PropComponent: FC<QuestionTitlePropsType> = (props: QuestionTitlePropsType
         <Input />
       </Form.Item>
 
-      <Form.Item>
+      <Form.Item label="层级">
       <Select
           options={[
             { value: 1, text: 1 },

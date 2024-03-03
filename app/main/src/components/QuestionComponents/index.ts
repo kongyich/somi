@@ -8,6 +8,7 @@ export type ComponentConfType = {
   title: string
   type: string
   Component: FC<ComponentPropsType>,
+  PropComponent: FC<ComponentPropsType>,
   defaultProps: ComponentPropsType
 }
 
@@ -22,7 +23,6 @@ export const componentConfGroup = [
     components: [QuestionTitleConf],
   },
 ]
-
 
 export const getComponentConfByType = (type: string) => {
   return componentConfList.find(c => c.type === type)
