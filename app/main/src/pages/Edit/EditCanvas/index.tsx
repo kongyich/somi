@@ -4,9 +4,10 @@ import { ComponentInfoType, changeSelectedId } from '../../../store/features/com
 import styles from './styles/index.module.scss'
 import { getComponentConfByType } from '../../../components/QuestionComponents'
 import { useDispatch } from 'react-redux'
+import classNames from 'classnames'
 
 const EditCanvas: FC = () => {
-  const { componentList } = useGetComponentInfo()
+  const { componentList, selectedId } = useGetComponentInfo()
   const dispatch = useDispatch()
 
   const genComponent = (componentInfo: ComponentInfoType) => {
@@ -28,8 +29,16 @@ const EditCanvas: FC = () => {
         {
           componentList.map(c => {
             const { fe_id } = c
+
+            const wrapperDefaultClassName = styles['component-wrapper']
+            const selectedClassName = styles.selected
+            const wrapperClassName = classNames({
+              [wrapperDefaultClassName]: true,
+              [selectedClassName]: fe_id === selectedId,
+            })
+
             return (
-              <div onClick={e => handleClick(e, fe_id)}>
+              <div className={wrapperClassName} key={fe_id} onClick={e => handleClick(e, fe_id)}>
                 <div className={styles.component}>{genComponent(c)}</div>
               </div>
             )
