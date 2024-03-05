@@ -1,8 +1,9 @@
 import { FC } from 'react'
-import QuestionTitleConf from './Title'
-import { QuestionTitlePropsType } from './Title/interface'
+import QuestionTitleConf, { QuestionTitlePropsType } from './Title'
+import QuestionInputConf, { QuestionInputPropsType } from './Input'
+import QuestionTextareaConf, { QuestionTextareaPropstype } from './Textarea'
 
-export type ComponentPropsType = QuestionTitlePropsType
+export type ComponentPropsType = QuestionTitlePropsType & QuestionInputPropsType & QuestionTextareaPropstype
 
 export type ComponentConfType = {
   title: string
@@ -12,8 +13,11 @@ export type ComponentConfType = {
   defaultProps: ComponentPropsType
 }
 
+// 编辑器主视角获取列表
 const componentConfList: Array<ComponentConfType> = [
-  QuestionTitleConf
+  QuestionTitleConf,
+  QuestionInputConf,
+  QuestionTextareaConf
 ]
 
 export const componentConfGroup = [
@@ -21,6 +25,11 @@ export const componentConfGroup = [
     groupId: 'textGroup',
     groupName: '文本显示',
     components: [QuestionTitleConf],
+  },
+  {
+    groupId: 'inputGroup',
+    groupName: '用户输入',
+    components: [QuestionInputConf, QuestionTextareaConf],
   },
 ]
 

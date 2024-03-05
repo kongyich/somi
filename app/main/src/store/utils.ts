@@ -8,9 +8,9 @@ import { ComponentInfoType, ComponentsStateType } from "./features/componentSlic
  * @returns void
 */
 export const insertNewComponent = (draft: ComponentsStateType, newComponent: ComponentInfoType) => {
-  const { selectId, componentList } = draft
+  const { selectedId, componentList } = draft
 
-  const index = componentList.findIndex(c => c.fe_id === selectId)
+  const index = componentList.findIndex(c => c.fe_id === selectedId)
 
   if(index < 0) {
     // 未选中任何组件
@@ -19,5 +19,5 @@ export const insertNewComponent = (draft: ComponentsStateType, newComponent: Com
     draft.componentList.splice(index + 1, 0, newComponent)
   }
 
-  draft.selectId = newComponent.fe_id
+  draft.selectedId = newComponent.fe_id
 }
