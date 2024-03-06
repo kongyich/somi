@@ -2,8 +2,9 @@ import { FC } from 'react'
 import QuestionTitleConf, { QuestionTitlePropsType } from './Title'
 import QuestionInputConf, { QuestionInputPropsType } from './Input'
 import QuestionTextareaConf, { QuestionTextareaPropstype } from './Textarea'
+import QuestionInfoConf, { QuestionInfoPropsType } from './Info'
 
-export type ComponentPropsType = QuestionTitlePropsType & QuestionInputPropsType & QuestionTextareaPropstype
+export type ComponentPropsType = QuestionTitlePropsType & QuestionInputPropsType & QuestionTextareaPropstype & QuestionInfoPropsType
 
 export type ComponentConfType = {
   title: string
@@ -17,14 +18,15 @@ export type ComponentConfType = {
 const componentConfList: Array<ComponentConfType> = [
   QuestionTitleConf,
   QuestionInputConf,
-  QuestionTextareaConf
+  QuestionTextareaConf,
+  QuestionInfoConf
 ]
 
 export const componentConfGroup = [
   {
     groupId: 'textGroup',
     groupName: '文本显示',
-    components: [QuestionTitleConf],
+    components: [QuestionTitleConf, QuestionInfoConf],
   },
   {
     groupId: 'inputGroup',
