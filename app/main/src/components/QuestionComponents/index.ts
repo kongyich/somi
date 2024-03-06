@@ -3,8 +3,9 @@ import QuestionTitleConf, { QuestionTitlePropsType } from './Title'
 import QuestionInputConf, { QuestionInputPropsType } from './Input'
 import QuestionTextareaConf, { QuestionTextareaPropstype } from './Textarea'
 import QuestionInfoConf, { QuestionInfoPropsType } from './Info'
+import QuestionRadioConf, { QuestionRadioPropsType } from './Radio'
 
-export type ComponentPropsType = QuestionTitlePropsType & QuestionInputPropsType & QuestionTextareaPropstype & QuestionInfoPropsType
+export type ComponentPropsType = QuestionTitlePropsType & QuestionInputPropsType & QuestionTextareaPropstype & QuestionInfoPropsType & QuestionRadioPropsType
 
 export type ComponentConfType = {
   title: string
@@ -19,7 +20,8 @@ const componentConfList: Array<ComponentConfType> = [
   QuestionTitleConf,
   QuestionInputConf,
   QuestionTextareaConf,
-  QuestionInfoConf
+  QuestionInfoConf,
+  QuestionRadioConf
 ]
 
 export const componentConfGroup = [
@@ -31,7 +33,7 @@ export const componentConfGroup = [
   {
     groupId: 'inputGroup',
     groupName: '用户输入',
-    components: [QuestionInputConf, QuestionTextareaConf],
+    components: [QuestionInputConf, QuestionTextareaConf, QuestionRadioConf],
   },
 ]
 
