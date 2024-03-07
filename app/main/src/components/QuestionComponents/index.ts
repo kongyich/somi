@@ -4,8 +4,9 @@ import QuestionInputConf, { QuestionInputPropsType } from './Input'
 import QuestionTextareaConf, { QuestionTextareaPropstype } from './Textarea'
 import QuestionInfoConf, { QuestionInfoPropsType } from './Info'
 import QuestionRadioConf, { QuestionRadioPropsType } from './Radio'
+import QuestionParagraphConf, { QuestionParagraphPropsType } from './Paragraph'
 
-export type ComponentPropsType = QuestionTitlePropsType & QuestionInputPropsType & QuestionTextareaPropstype & QuestionInfoPropsType & QuestionRadioPropsType
+export type ComponentPropsType = QuestionTitlePropsType & QuestionInputPropsType & QuestionTextareaPropstype & QuestionInfoPropsType & QuestionRadioPropsType & QuestionParagraphPropsType
 
 export type ComponentConfType = {
   title: string
@@ -21,14 +22,15 @@ const componentConfList: Array<ComponentConfType> = [
   QuestionInputConf,
   QuestionTextareaConf,
   QuestionInfoConf,
-  QuestionRadioConf
+  QuestionRadioConf,
+  QuestionParagraphConf
 ]
 
 export const componentConfGroup = [
   {
     groupId: 'textGroup',
     groupName: '文本显示',
-    components: [QuestionTitleConf, QuestionInfoConf],
+    components: [QuestionTitleConf, QuestionInfoConf, QuestionParagraphConf],
   },
   {
     groupId: 'inputGroup',
