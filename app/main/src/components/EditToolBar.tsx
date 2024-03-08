@@ -1,13 +1,31 @@
 import { FC } from 'react'
 import { Space, Button, Tooltip } from 'antd'
+import { useDispatch } from 'react-redux'
 import { DeleteOutlined, EyeInvisibleOutlined, LockOutlined, CopyOutlined, BlockOutlined, UpOutlined, DownOutlined, UndoOutlined, RedoOutlined } from '@ant-design/icons'
+import useGetComponentInfo from '../hooks/useGetComponentInfo'
+import { removeSelectedComponent } from '../store/features/componentSlice'
 
 const EditToolBar: FC = () => {
+  const dispatch = useDispatch()
+  const { selectedId, componentList, selectedComponent, copiedComponent } = useGetComponentInfo()
+  const { isLocked } = selectedComponent || {}
+
+  const length = componentList.length
+  const selectIndex = componentList.findIndex(c => c.fe_id === selectedId)
+  // 第一个
+  const isFirst = selectIndex <= 0
+  // 最后一个
+  const isLast = selectIndex + 1 >= length
+  // 删除
+  function handleDelete() {
+    dispatch(removeSelectedComponent())
+  }
+
   return (
     <div>
       <Space>
         <Tooltip title="delete">
-          <Button shape='circle' icon={<DeleteOutlined />}></Button>
+          <Button shape='circle' icon={<DeleteOutlined />} onClick={handleDelete}></Button>
         </Tooltip>
         <Tooltip title="hidden">
           <Button shape='circle' icon={<EyeInvisibleOutlined />}></Button>

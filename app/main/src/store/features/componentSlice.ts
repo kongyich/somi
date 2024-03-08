@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-// import produce from 'immer'
+import { produce } from 'immer'
 import { ComponentPropsType } from '../../components/QuestionComponents'
-import { insertNewComponent } from "../utils";
+import { getNextSelectedId, insertNewComponent } from "../utils";
 
 export type ComponentInfoType = {
   fe_id: string,
@@ -28,14 +28,14 @@ export const componentsSlice = createSlice({
   name: 'components',
   initialState: INIT_STATE,
   reducers: {
-    addComponent: (draft: ComponentsStateType, action: PayloadAction<ComponentInfoType>) => {
+    addComponent: produce((draft: ComponentsStateType, action: PayloadAction<ComponentInfoType>) => {
       const newComponent = action.payload
       insertNewComponent(draft, newComponent)
-    },
-    changeSelectedId: (draft: ComponentsStateType, action: PayloadAction<string>) => {
+    }),
+    changeSelectedId: produce((draft: ComponentsStateType, action: PayloadAction<string>) => {
       draft.selectedId = action.payload
-    },
-    changeComponentProps: (draft: ComponentsStateType,
+    }),
+    changeComponentProps: produce((draft: ComponentsStateType,
       action: PayloadAction<{ fe_id: string; newProps: ComponentPropsType }>) => {
       const { fe_id, newProps } = action.payload
 
@@ -47,10 +47,21 @@ export const componentsSlice = createSlice({
           ...newProps,
         }
       }
+    }),
+    // 删除选中
+    removeSelectedComponent: (draft: ComponentsStateType) => {
+      const {componentList = [], selectedId: removeId} = draft
+
+      // 新的选中id 重新计算
+      const newSelectedId = getNextSelectedId(removeId, componentList)
+
+      draft.selectedId = newSelectedId
+      const index = componentList.findIndex(c => c.fe_id === removeId)
+      componentList.splice(index, 1)
     }
   }
 })
 
-export const { addComponent, changeSelectedId, changeComponentProps } = componentsSlice.actions
+export const { addComponent, changeSelectedId, changeComponentProps, removeSelectedComponent } = componentsSlice.actions
 
 export default componentsSlice.reducer
