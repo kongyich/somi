@@ -50,7 +50,7 @@ export const componentsSlice = createSlice({
     }),
     // 删除选中
     removeSelectedComponent: produce((draft: ComponentsStateType) => {
-      const {componentList = [], selectedId: removeId} = draft
+      const { componentList = [], selectedId: removeId } = draft
 
       // 新的选中id 重新计算
       const newSelectedId = getNextSelectedId(removeId, componentList)
@@ -67,7 +67,7 @@ export const componentsSlice = createSlice({
 
       // 重新计算 selectedId
       let newSelectedId = ''
-      if(isHidden) {
+      if (isHidden) {
         // 隐藏
         newSelectedId = getNextSelectedId(fe_id, componentList)
       } else {
@@ -77,13 +77,25 @@ export const componentsSlice = createSlice({
       draft.selectedId = newSelectedId
 
       const curComp = componentList.find(c => c.fe_id === fe_id)
-      if(curComp) {
+      if (curComp) {
         curComp.isHidden = isHidden
+      }
+    }),
+
+    // 锁定组件
+    changeComponentLock: produce((draft: ComponentsStateType, action: PayloadAction<{ fe_id: string }>) => {
+      const { fe_id } = action.payload
+      const { componentList = [] } = draft
+
+      const curComp = componentList.find(c => c.fe_id === fe_id)
+
+      if (curComp) {
+        curComp.isLocked = !curComp.isLocked
       }
     })
   }
 })
 
-export const { addComponent, changeSelectedId, changeComponentProps, removeSelectedComponent, changeComponentHidden } = componentsSlice.actions
+export const { addComponent, changeSelectedId, changeComponentProps, removeSelectedComponent, changeComponentHidden, changeComponentLock } = componentsSlice.actions
 
 export default componentsSlice.reducer
