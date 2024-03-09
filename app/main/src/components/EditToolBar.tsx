@@ -3,7 +3,7 @@ import { Space, Button, Tooltip } from 'antd'
 import { useDispatch } from 'react-redux'
 import { DeleteOutlined, EyeInvisibleOutlined, LockOutlined, CopyOutlined, BlockOutlined, UpOutlined, DownOutlined, UndoOutlined, RedoOutlined } from '@ant-design/icons'
 import useGetComponentInfo from '../hooks/useGetComponentInfo'
-import { removeSelectedComponent } from '../store/features/componentSlice'
+import { removeSelectedComponent, changeComponentHidden } from '../store/features/componentSlice'
 
 const EditToolBar: FC = () => {
   const dispatch = useDispatch()
@@ -21,6 +21,11 @@ const EditToolBar: FC = () => {
     dispatch(removeSelectedComponent())
   }
 
+  // 隐藏
+  function handleHidden() {
+    dispatch(changeComponentHidden({ fe_id: selectedId, isHidden: true }))
+  }
+
   return (
     <div>
       <Space>
@@ -28,7 +33,7 @@ const EditToolBar: FC = () => {
           <Button shape='circle' icon={<DeleteOutlined />} onClick={handleDelete}></Button>
         </Tooltip>
         <Tooltip title="hidden">
-          <Button shape='circle' icon={<EyeInvisibleOutlined />}></Button>
+          <Button shape='circle' icon={<EyeInvisibleOutlined />} onClick={handleHidden}></Button>
         </Tooltip>
         <Tooltip title="lock">
           <Button shape='circle' icon={<LockOutlined />}></Button>

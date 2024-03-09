@@ -27,7 +27,7 @@ const EditCanvas: FC = () => {
     <>
       <div className={styles.canvas}>
         {
-          componentList.map(c => {
+          componentList.filter(c => !c.isHidden).map(c => {
             const { fe_id } = c
 
             const wrapperDefaultClassName = styles['component-wrapper']
