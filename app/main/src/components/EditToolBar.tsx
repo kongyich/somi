@@ -3,7 +3,7 @@ import { Space, Button, Tooltip } from 'antd'
 import { useDispatch } from 'react-redux'
 import { DeleteOutlined, EyeInvisibleOutlined, LockOutlined, CopyOutlined, BlockOutlined, UpOutlined, DownOutlined, UndoOutlined, RedoOutlined } from '@ant-design/icons'
 import useGetComponentInfo from '../hooks/useGetComponentInfo'
-import { removeSelectedComponent, changeComponentHidden, changeComponentLock, copySelectedComponent, pasteSelectedComponent } from '../store/features/componentSlice'
+import { removeSelectedComponent, changeComponentHidden, changeComponentLock, copySelectedComponent, pasteSelectedComponent, moveComponent } from '../store/features/componentSlice'
 
 const EditToolBar: FC = () => {
   const dispatch = useDispatch()
@@ -44,11 +44,13 @@ const EditToolBar: FC = () => {
   // 上移
   function moveUp() {
     if(isFirst) return
+    dispatch(moveComponent({ oldIndex: selectIndex, newIndex: selectIndex - 1 }))
   }
 
   // 下移
   function moveDown() {
     if(isLast) return
+    dispatch(moveComponent({ oldIndex: selectIndex, newIndex: selectIndex + 1 }))
   }
 
   return (
