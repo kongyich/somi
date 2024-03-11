@@ -3,8 +3,10 @@ import { Typography } from 'antd'
 import { QuestionParagraphPropsType, QuestionParagraphDefaultProps } from './interface'
 
 const { Paragraph } = Typography
+
 const Component: FC<QuestionParagraphPropsType> = (props) => {
   const { text, isCenter } = { ...QuestionParagraphDefaultProps, ...props }
+
   const textList = text.split('\n')
 
   return (

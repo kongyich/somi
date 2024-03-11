@@ -1,7 +1,9 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { produce } from 'immer'
+import cloneDeep from 'lodash.clonedeep'
 import { ComponentPropsType } from '../../components/QuestionComponents'
 import { getNextSelectedId, insertNewComponent } from "../utils";
+import { nanoid } from "nanoid";
 
 export type ComponentInfoType = {
   fe_id: string,
@@ -92,10 +94,30 @@ export const componentsSlice = createSlice({
       if (curComp) {
         curComp.isLocked = !curComp.isLocked
       }
+    }),
+
+    // 复制组件
+    copySelectedComponent: produce((draft: ComponentsStateType) => {
+      const { selectedId, componentList } = draft
+      const selectedComponent = componentList.find(c => c.fe_id === selectedId)
+
+      if (selectedComponent == null) return
+      draft.copiedComponent = cloneDeep(selectedComponent)
+    }),
+
+    // 粘贴组件
+    pasteSelectedComponent: produce((draft: ComponentsStateType) => {
+      const { copiedComponent } = draft
+
+      if (copiedComponent == null) return
+      // 修改id
+      copiedComponent.fe_id = nanoid()
+      // 插入新组件
+      insertNewComponent(draft, copiedComponent)
     })
   }
 })
 
-export const { addComponent, changeSelectedId, changeComponentProps, removeSelectedComponent, changeComponentHidden, changeComponentLock } = componentsSlice.actions
+export const { addComponent, changeSelectedId, changeComponentProps, removeSelectedComponent, changeComponentHidden, changeComponentLock, pasteSelectedComponent, copySelectedComponent } = componentsSlice.actions
 
 export default componentsSlice.reducer

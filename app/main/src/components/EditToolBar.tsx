@@ -3,7 +3,7 @@ import { Space, Button, Tooltip } from 'antd'
 import { useDispatch } from 'react-redux'
 import { DeleteOutlined, EyeInvisibleOutlined, LockOutlined, CopyOutlined, BlockOutlined, UpOutlined, DownOutlined, UndoOutlined, RedoOutlined } from '@ant-design/icons'
 import useGetComponentInfo from '../hooks/useGetComponentInfo'
-import { removeSelectedComponent, changeComponentHidden, changeComponentLock } from '../store/features/componentSlice'
+import { removeSelectedComponent, changeComponentHidden, changeComponentLock, copySelectedComponent, pasteSelectedComponent } from '../store/features/componentSlice'
 
 const EditToolBar: FC = () => {
   const dispatch = useDispatch()
@@ -31,6 +31,26 @@ const EditToolBar: FC = () => {
     dispatch(changeComponentLock({ fe_id: selectedId }))
   }
 
+  // 复制
+  function copy() {
+    dispatch(copySelectedComponent())
+  }
+
+  // 粘贴
+  function paste() {
+    dispatch(pasteSelectedComponent())
+  }
+
+  // 上移
+  function moveUp() {
+    if(isFirst) return
+  }
+
+  // 下移
+  function moveDown() {
+    if(isLast) return
+  }
+
   return (
     <div>
       <Space>
@@ -44,16 +64,16 @@ const EditToolBar: FC = () => {
           <Button shape='circle' icon={<LockOutlined />} type={isLocked ? 'primary' : 'default'} onClick={handleLock}></Button>
         </Tooltip>
         <Tooltip title="copy">
-          <Button shape="circle" icon={<CopyOutlined />}></Button>
+          <Button shape="circle" icon={<CopyOutlined />} onClick={copy}></Button>
         </Tooltip>
         <Tooltip title="paste">
-          <Button shape="circle" icon={<BlockOutlined />}></Button>
+          <Button shape="circle" icon={<BlockOutlined />} onClick={paste} disabled={copiedComponent == null}></Button>
         </Tooltip>
         <Tooltip title="up">
-          <Button shape="circle" icon={<UpOutlined />}></Button>
+          <Button shape="circle" icon={<UpOutlined />} onClick={moveUp}></Button>
         </Tooltip>
         <Tooltip title="down">
-          <Button shape="circle" icon={<DownOutlined />}></Button>
+          <Button shape="circle" icon={<DownOutlined />} onClick={moveDown}></Button>
         </Tooltip>
         <Tooltip title="undo">
           <Button shape="circle" icon={<UndoOutlined />}></Button>

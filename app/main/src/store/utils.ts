@@ -22,7 +22,6 @@ export const insertNewComponent = (draft: ComponentsStateType, newComponent: Com
   draft.selectedId = newComponent.fe_id
 }
 
-
 /**
  * @param fe_id 当前组件id
  * @param componentList 组件列表
