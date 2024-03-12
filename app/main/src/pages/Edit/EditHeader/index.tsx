@@ -1,12 +1,10 @@
 import { FC, useState, ChangeEvent } from 'react'
 import styles from './index.module.scss'
 import EditToolBar from '../../../components/EditToolBar'
-import { Space, Button, Typography, Input } from 'antd'
+import { Space, Button, Input } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import { LeftOutlined, EditOutlined } from '@ant-design/icons'
 import { useDispatch } from 'react-redux'
-
-const { Title } = Typography
 
 const SaveButton: FC = () => {
   return (
