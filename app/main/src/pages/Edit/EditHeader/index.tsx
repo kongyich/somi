@@ -5,6 +5,8 @@ import { Space, Button, Input } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import { LeftOutlined, EditOutlined } from '@ant-design/icons'
 import { useDispatch } from 'react-redux'
+import { changePageTitle } from '../../../store/features/pageInfoSlice'
+import useGetPageInfo from '../../../hooks/useGetPageInfo'
 
 const SaveButton: FC = () => {
   return (
@@ -23,19 +25,21 @@ const PublishButton: FC = () => {
 }
 
 const TitleElem: FC = () => {
-  // const { title } = useGetPageInfo()
+  const { title } = useGetPageInfo()
   const [editState, SetEditState] = useState(false)
   const dispatch = useDispatch()
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     const newTitle = event.target.value.trim()
     if (!newTitle) return
+
+    dispatch(changePageTitle(newTitle))
   }
 
   if (editState) {
     return (
       <Input
-        value={''}
+        value={title}
         onBlur={() => SetEditState(false)}
         onPressEnter={() => SetEditState(false)}
         onChange={handleChange}
@@ -44,9 +48,9 @@ const TitleElem: FC = () => {
   }
 
   return (
-    <Space  align="center">
+    <Space align="center">
       {/* <Title level={5}>标题</Title> */}
-      <span>标题</span>
+      <span>{ title }</span>
       <Button icon={<EditOutlined />} type='text' onClick={() => SetEditState(true)}></Button>
     </Space>
   )

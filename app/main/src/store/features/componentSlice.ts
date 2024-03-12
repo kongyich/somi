@@ -129,10 +129,10 @@ export const componentsSlice = createSlice({
       const { newTitle, fe_id } = action.payload
       const curComp = draft.componentList.find(c => c.fe_id === fe_id)
       if(curComp) curComp.title = newTitle
-    })
+    }),
   }
 })
 
-export const { addComponent, changeSelectedId, changeComponentProps, removeSelectedComponent, changeComponentHidden, changeComponentLock, pasteSelectedComponent, copySelectedComponent, moveComponent, changeComponentTitle } = componentsSlice.actions
+export const { addComponent, changeSelectedId, changeComponentProps, removeSelectedComponent, changeComponentHidden, changeComponentLock, pasteSelectedComponent, copySelectedComponent, moveComponent, changeComponentTitle, changePageTitle } = componentsSlice.actions
 
 export default componentsSlice.reducer
