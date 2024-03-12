@@ -23,10 +23,14 @@ const pageInfoSlice = createSlice({
   reducers: {
     changePageTitle: produce((state: PageInfoType, action: PayloadAction<string>) => {
       state.title = action.payload
+    }),
+
+    resetPageInfo: produce((state: PageInfoType, action: PayloadAction<PageInfoType>) => {
+      return action.payload
     })
   }
 })
 
-export const { changePageTitle } = pageInfoSlice.actions
+export const { changePageTitle, resetPageInfo } = pageInfoSlice.actions
 
 export default pageInfoSlice.reducer
