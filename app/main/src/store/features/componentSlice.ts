@@ -128,11 +128,33 @@ export const componentsSlice = createSlice({
     changeComponentTitle: produce((draft: ComponentsStateType, action: PayloadAction<{ fe_id: string, newTitle: string }>) => {
       const { newTitle, fe_id } = action.payload
       const curComp = draft.componentList.find(c => c.fe_id === fe_id)
-      if(curComp) curComp.title = newTitle
+      if (curComp) curComp.title = newTitle
     }),
+
+    // 选择上一个
+    selectPrevComponent: produce((draft: ComponentsStateType) => {
+      const { selectedId, componentList } = draft
+      const selectIndex = componentList.findIndex(c => c.fe_id == selectedId)
+
+      if (selectIndex < 0) return // 未选中组件
+      if (selectIndex <= 0) return // 选中了第一个
+
+      draft.selectedId = componentList[selectIndex - 1].fe_id
+    }),
+
+    // 选择下一个
+    selectNextComponent: produce((draft: ComponentsStateType) => {
+      const { selectedId, componentList } = draft
+      const selectIndex = componentList.findIndex(c => c.fe_id == selectedId)
+
+      if (selectIndex < 0) return // 未选中组件
+      if (selectIndex === componentList.length - 1) return // 选中了最后一个
+
+      draft.selectedId = componentList[selectIndex + 1].fe_id
+    })
   }
 })
 
-export const { addComponent, changeSelectedId, changeComponentProps, removeSelectedComponent, changeComponentHidden, changeComponentLock, pasteSelectedComponent, copySelectedComponent, moveComponent, changeComponentTitle, changePageTitle } = componentsSlice.actions
+export const { addComponent, changeSelectedId, changeComponentProps, removeSelectedComponent, changeComponentHidden, changeComponentLock, pasteSelectedComponent, copySelectedComponent, moveComponent, changeComponentTitle, selectPrevComponent, selectNextComponent } = componentsSlice.actions
 
 export default componentsSlice.reducer

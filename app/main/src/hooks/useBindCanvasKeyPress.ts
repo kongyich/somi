@@ -1,6 +1,6 @@
 import { useKeyPress } from 'ahooks'
 import { useDispatch } from 'react-redux'
-import { removeSelectedComponent, copySelectedComponent, pasteSelectedComponent } from '../store/features/componentSlice'
+import { removeSelectedComponent, copySelectedComponent, pasteSelectedComponent, selectPrevComponent, selectNextComponent } from '../store/features/componentSlice'
 
 /**
  * 判断 activeElem 是否合法
@@ -36,5 +36,17 @@ export default function useBindCanvasKeyPress() {
   useKeyPress(['ctrl.v', 'meta.v'], () => {
     if (!isActiveElementValid()) return
     dispatch(pasteSelectedComponent())
+  })
+
+  // 选中上一个
+  useKeyPress('uparrow', () => {
+    if (!isActiveElementValid()) return
+    dispatch(selectPrevComponent())
+  })
+
+  // 选中下一个
+  useKeyPress('downarrow', () => {
+    if (!isActiveElementValid()) return
+    dispatch(selectNextComponent())
   })
 }
