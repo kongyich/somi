@@ -5,6 +5,7 @@ import styles from './styles/index.module.scss'
 import { getComponentConfByType } from '../../../components/QuestionComponents'
 import { useDispatch } from 'react-redux'
 import classNames from 'classnames'
+import useBindCanvasKeyPress from '../../../hooks/useBindCanvasKeyPress'
 
 const EditCanvas: FC = () => {
   const { componentList, selectedId } = useGetComponentInfo()
@@ -23,6 +24,11 @@ const EditCanvas: FC = () => {
     event.stopPropagation() // 阻止冒泡
     dispatch(changeSelectedId(id))
   }
+
+
+  // 绑定键盘事件
+  useBindCanvasKeyPress()
+  
   return (
     <>
       <div className={styles.canvas}>
