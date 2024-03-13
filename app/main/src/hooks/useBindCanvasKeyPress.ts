@@ -1,6 +1,6 @@
 import { useKeyPress } from 'ahooks'
 import { useDispatch } from 'react-redux'
-import { removeSelectedComponent } from '../store/features/componentSlice'
+import { removeSelectedComponent, copySelectedComponent, pasteSelectedComponent } from '../store/features/componentSlice'
 
 /**
  * 判断 activeElem 是否合法
@@ -24,5 +24,17 @@ export default function useBindCanvasKeyPress() {
   useKeyPress(['backspace', 'delete'], () => {
     if (!isActiveElementValid()) return
     dispatch(removeSelectedComponent())
+  })
+
+  // 复制
+  useKeyPress(['ctrl.c', 'meta.c'], () => {
+    if (!isActiveElementValid()) return
+    dispatch(copySelectedComponent())
+  })
+
+  // 粘贴
+  useKeyPress(['ctrl.v', 'meta.v'], () => {
+    if (!isActiveElementValid()) return
+    dispatch(pasteSelectedComponent())
   })
 }
