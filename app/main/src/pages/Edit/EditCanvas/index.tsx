@@ -25,7 +25,6 @@ const EditCanvas: FC = () => {
     dispatch(changeSelectedId(id))
   }
 
-
   // 绑定键盘事件
   useBindCanvasKeyPress()
   

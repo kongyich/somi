@@ -3,6 +3,8 @@ import MainLayout from '../layouts/MainLayout'
 import QuestionLayout from '../layouts/QuestionLayout'
 import Home from '../pages/Home'
 import Edit from '../pages/Edit/index'
+import ManageLayout from '../layouts/ManageLayout'
+import List from '../pages/Manage/List'
 
 const router = createBrowserRouter([
   {
@@ -12,6 +14,16 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home />,
+      },
+      {
+        path: 'manage',
+        element: <ManageLayout />,
+        children: [
+          {
+            path: 'list',
+            element: <List />
+          }
+        ]
       }
     ]
   },
