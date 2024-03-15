@@ -8,7 +8,6 @@ const Component: FC<QuestionParagraphPropsType> = (props) => {
   const { text, isCenter } = { ...QuestionParagraphDefaultProps, ...props }
 
   const textList = text.split('\n')
-
   return (
     <Paragraph style={{ textAlign: isCenter ? 'center' : 'left' }}>
       {
