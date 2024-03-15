@@ -6,6 +6,19 @@ import Edit from '../pages/Edit/index'
 import ManageLayout from '../layouts/ManageLayout'
 import List from '../pages/Manage/List'
 
+export const HOME_PATHNAME = '/'
+// 登录
+export const LOGIN_PATHNAME = '/login'
+// 注册
+export const REGISTER_PATHNAME = '/register'
+// 首页
+export const MANAGE_INDEX_PATHNAME = '/manage/list'
+
+export function isLoginOrRegister(pathname: string) {
+  if ([LOGIN_PATHNAME, REGISTER_PATHNAME].includes(pathname)) return true
+  return false
+}
+
 const router = createBrowserRouter([
   {
     path: '/',
