@@ -1,8 +1,58 @@
 import { FC } from 'react'
+import styles from './styles/ManageLayout.module.scss'
+import { Outlet, useNavigate, useLocation } from 'react-router-dom'
+import { PlusOutlined, BarsOutlined, StarOutlined, DeleteOutlined } from '@ant-design/icons'
+import { Button, Space, Divider, message } from 'antd'
 
 const ManageLayout: FC = () => {
+
+  const loading = false
+  const { pathname } = useLocation()
+  const nav = useNavigate()
+  function handleCreateClick() { }
+
   return (
-    <div>ManageLayout</div>
+    <div className={styles.container}>
+      <div className={styles.left}>
+        <Space direction="vertical">
+          <Button
+            type="primary"
+            size="large"
+            icon={<PlusOutlined />}
+            onClick={handleCreateClick}
+            disabled={loading}
+          >
+            新建问卷
+          </Button>
+          <Divider style={{ borderTop: 'transparent' }} />
+          <Button
+            type={pathname.startsWith('/manage/list') ? 'default' : 'text'}
+            size="large"
+            icon={<BarsOutlined />}
+            onClick={() => nav('/manage/list')}
+          >
+            我的问卷
+          </Button>
+          <Button
+            type={pathname.startsWith('/manage/star') ? 'default' : 'text'}
+            size="large"
+            icon={<StarOutlined />}
+            onClick={() => nav('/manage/star')}
+          >
+            星标问卷
+          </Button>
+          <Button
+            type={pathname.startsWith('/manage/trash') ? 'default' : 'text'}
+            size="large"
+            icon={<DeleteOutlined />}
+            onClick={() => nav('/manage/trash')}
+          >
+            回收站
+          </Button>
+        </Space>
+      </div>
+      <div className={styles.right}></div>
+    </div>
   )
 }
 
