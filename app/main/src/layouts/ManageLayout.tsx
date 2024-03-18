@@ -51,7 +51,9 @@ const ManageLayout: FC = () => {
           </Button>
         </Space>
       </div>
-      <div className={styles.right}></div>
+      <div className={styles.right}>
+        <Outlet />
+      </div>
     </div>
   )
 }
