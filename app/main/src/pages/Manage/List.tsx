@@ -11,7 +11,16 @@ const List: FC = () => {
 
   const [started, setStarted] = useState(false) // 是否已经开始加载（防抖，有延迟时间）
 
-  const [list, setList] = useState([])
+  const [list, setList] = useState([
+    {
+      _id: 213123,
+      title: "第一个",
+      isStar: true,
+      isPublished: false,
+      answerCount: 12,
+      createdAt: '2024-03-24',
+    }
+  ])
   const containerRef = useRef<HTMLDivElement>(null)
   const [total, setTotal] = useState(0)
   const haveMoreData = total > list.length // 有没有更多的、为加载完成的数据

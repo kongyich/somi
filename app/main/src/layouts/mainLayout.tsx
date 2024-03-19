@@ -19,7 +19,7 @@ const MainLayout: FC = () => {
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
-      <Sider trigger={null} collapsible collapsed={collapsed}>
+      {/* <Sider trigger={null} collapsible collapsed={collapsed}>
         <div className="demo-logo-vertical" />
         <Menu
           theme="dark"
@@ -43,9 +43,9 @@ const MainLayout: FC = () => {
             },
           ]}
         />
-      </Sider>
+      </Sider> */}
       <Layout>
-        <Header style={{ padding: 0, background: colorBgContainer }}>
+        {/* <Header style={{ padding: 0, background: colorBgContainer }}>
           <Button
             type="text"
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
@@ -56,7 +56,7 @@ const MainLayout: FC = () => {
               height: 64,
             }}
           />
-        </Header>
+        </Header> */}
         <Content
           style={{
             width: '100%'
