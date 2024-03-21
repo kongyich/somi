@@ -7,7 +7,6 @@ const Component:FC<QuestionInfoPropsType> = (props: QuestionInfoPropsType) => {
   const { title, desc = '' } = { ...QuestionInfoDefaultProps, ...props }
 
   const descList = desc.split('\n')
-
   return (
     <div style={{ textAlign: 'center' }}>
       <Title style={{ fontSize: '24px' }}>{ title }</Title>
