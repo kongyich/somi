@@ -2,7 +2,7 @@ import { FC } from 'react'
 import styles from './styles/ManageLayout.module.scss'
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 import { PlusOutlined, BarsOutlined, StarOutlined, DeleteOutlined } from '@ant-design/icons'
-import { Button, Space, Divider, message } from 'antd'
+import { Button, Space, Divider } from 'antd'
 
 const ManageLayout: FC = () => {
 

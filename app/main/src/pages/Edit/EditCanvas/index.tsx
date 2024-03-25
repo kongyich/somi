@@ -1,11 +1,13 @@
 import { FC } from 'react'
 import useGetComponentInfo from '../../../hooks/useGetComponentInfo'
-import { ComponentInfoType, changeSelectedId } from '../../../store/features/componentSlice'
+import { ComponentInfoType, changeSelectedId, moveComponent } from '../../../store/features/componentSlice'
 import styles from './styles/index.module.scss'
 import { getComponentConfByType } from '../../../components/QuestionComponents'
 import { useDispatch } from 'react-redux'
 import classNames from 'classnames'
 import useBindCanvasKeyPress from '../../../hooks/useBindCanvasKeyPress'
+import SortableContainer from '../../../components/DragSortable/SortableContainer'
+import SortableItem from '../../../components/DragSortable/SortableItem'
 
 const EditCanvas: FC = () => {
   const { componentList, selectedId } = useGetComponentInfo()
@@ -27,9 +29,17 @@ const EditCanvas: FC = () => {
 
   // 绑定键盘事件
   useBindCanvasKeyPress()
-  
+
+  const componentListWithId = componentList.map(c => {
+    return { ...c, id: c.fe_id }
+  })
+
+  const handleDragEnd = (oldIndex: number, newIndex: number) => {
+    dispatch(moveComponent({ oldIndex, newIndex }))
+  }
+
   return (
-    <>
+    <SortableContainer items={componentListWithId} onDragEnd={handleDragEnd}>
       <div className={styles.canvas}>
         {
           componentList.filter(c => !c.isHidden).map(c => {
@@ -45,14 +55,16 @@ const EditCanvas: FC = () => {
             })
 
             return (
-              <div className={wrapperClassName} key={fe_id} onClick={e => handleClick(e, fe_id)}>
-                <div className={styles.component}>{genComponent(c)}</div>
-              </div>
+              <SortableItem key={fe_id} id={fe_id}>
+                <div className={wrapperClassName} key={fe_id} onClick={e => handleClick(e, fe_id)}>
+                  <div className={styles.component}>{genComponent(c)}</div>
+                </div>
+              </SortableItem>
             )
           })
         }
       </div>
-    </>
+    </SortableContainer>
   )
 }
 

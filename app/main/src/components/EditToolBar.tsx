@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { Space, Button, Tooltip } from 'antd'
 import { useDispatch } from 'react-redux'
+import { ActionCreators as UndoActionCreators } from 'redux-undo'
 import { DeleteOutlined, EyeInvisibleOutlined, LockOutlined, CopyOutlined, BlockOutlined, UpOutlined, DownOutlined, UndoOutlined, RedoOutlined } from '@ant-design/icons'
 import useGetComponentInfo from '../hooks/useGetComponentInfo'
 import { removeSelectedComponent, changeComponentHidden, changeComponentLock, copySelectedComponent, pasteSelectedComponent, moveComponent } from '../store/features/componentSlice'
@@ -43,14 +44,24 @@ const EditToolBar: FC = () => {
 
   // 上移
   function moveUp() {
-    if(isFirst) return
+    if (isFirst) return
     dispatch(moveComponent({ oldIndex: selectIndex, newIndex: selectIndex - 1 }))
   }
 
   // 下移
   function moveDown() {
-    if(isLast) return
+    if (isLast) return
     dispatch(moveComponent({ oldIndex: selectIndex, newIndex: selectIndex + 1 }))
+  }
+
+  // 撤销
+  function undo() {
+    dispatch(UndoActionCreators.undo())
+  }
+
+  // 重做
+  function redo() {
+    dispatch(UndoActionCreators.redo())
   }
 
   return (
@@ -78,10 +89,10 @@ const EditToolBar: FC = () => {
           <Button shape="circle" icon={<DownOutlined />} onClick={moveDown}></Button>
         </Tooltip>
         <Tooltip title="undo">
-          <Button shape="circle" icon={<UndoOutlined />}></Button>
+          <Button shape="circle" icon={<UndoOutlined />} onClick={undo}></Button>
         </Tooltip>
         <Tooltip title="redo">
-          <Button shape="circle" icon={<RedoOutlined />}></Button>
+          <Button shape="circle" icon={<RedoOutlined />} onClick={redo}></Button>
         </Tooltip>
       </Space>
     </div>
