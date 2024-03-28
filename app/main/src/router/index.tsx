@@ -5,6 +5,8 @@ import Home from '../pages/Home'
 import Edit from '../pages/Edit/index'
 import ManageLayout from '../layouts/ManageLayout'
 import List from '../pages/Manage/List'
+import Trash from '../pages/Manage/Trash'
+import Star from '../pages/Manage/Star'
 
 export const HOME_PATHNAME = '/'
 // 登录
@@ -35,6 +37,14 @@ const router = createBrowserRouter([
           {
             path: 'list',
             element: <List />
+          },
+          {
+            path: 'trash',
+            element: <Trash />
+          },
+          {
+            path: 'star',
+            element: <Star />
           }
         ]
       }
