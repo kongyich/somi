@@ -72,6 +72,4 @@ const MainLayout: FC = () => {
   );
 };
 
-
-
 export default MainLayout
