@@ -2,11 +2,13 @@ import { FC } from 'react';
 import { Outlet } from 'react-router-dom'
 import { Layout } from 'antd';
 import styles from './styles/ManageLayout.module.scss'
+import useNavPage from '../hooks/useNavPage';
 
 const { Header, Content, Footer } = Layout;
 
 const MainLayout: FC = () => {
 
+  useNavPage(true)
   return (
     <Layout>
       <Header className={styles.header}>
