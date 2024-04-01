@@ -24,7 +24,7 @@ const MainLayout: FC = () => {
           <Outlet />
         </Content>
       </Layout>
-      <Footer className={styles.footer}>somi &copy;2024 - present. Created by gua</Footer>
+      <Footer className={styles.footer}>somi &copy;2024 - present. Created by Gua</Footer>
     </Layout>
   );
 };
