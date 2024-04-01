@@ -1,40 +1,30 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { Outlet } from 'react-router-dom'
-import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-} from '@ant-design/icons';
-import { Layout, Menu, Button, theme } from 'antd';
+import { Layout } from 'antd';
+import styles from './styles/ManageLayout.module.scss'
 
-const { Header, Sider, Content } = Layout;
+const { Header, Content, Footer } = Layout;
 
 const MainLayout: FC = () => {
-  const [collapsed, setCollapsed] = useState(false);
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken();
 
   return (
-    <Layout style={{ minHeight: '100vh' }}>
-      <Layout>
-        <Content
-          style={{
-            width: '100%'
-          }}
-        >
-          <div style={{ paddingLeft: '40px' }}>
-            <Outlet />
-          </div>
-
+    <Layout>
+      <Header className={styles.header}>
+        <div className={styles.left}>
+          {/* <Logo /> */}
+        </div>
+        <div className={styles.right}>
+          {/* <UserInfo /> */}
+        </div>
+      </Header>
+      <Layout className={styles.main}>
+        <Content >
+          <Outlet />
         </Content>
       </Layout>
+      <Footer className={styles.footer}>somi &copy;2024 - present. Created by gua</Footer>
     </Layout>
   );
 };
-
-
 
 export default MainLayout
