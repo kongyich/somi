@@ -12,6 +12,7 @@ const ListPagination: FC<PropsType> = (props) => {
   const [searchParams] = useSearchParams()
   const nav = useNavigate()
   const { pathname } = useLocation()
+
   const [current, setCurrent] = useState(1)
   const [pageSize, setPageSize] = useState(LIST_PAGE_SIZE)
 
